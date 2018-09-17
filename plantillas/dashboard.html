@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+ 
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ 
+
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/jquery-3.3.1.min.js">
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- 
+<form name="f2">
+  <p>Número 1: <input type="number" name="num1" value="0" onchange="cal()" /></p>
+  <p>Número 2: <input type="number" name="num2" value="0" onchange="cal()" /></p>
+  <p>Suma: <input type="number" name="sum" value="0" readonly="readonly" /></p>
+</form>
+ -->
+
+
+
+
+
+   
+
+
+   
+ </div>
+<html lang="en" id="top">
+	{% include "head.html" %}
+
+
+		<body>
+				<div class="page home-page">
+						<!-- Main Navbar-->
+						{% include "header.html" %}
+
+								<!-- Side Navbar -->
+
+									<!-- {% include "sidenav.html" %jj}kk -->
+
+								
+										<!-- Page Header-->
+										
+
+										<header class="page-header">
+
+												<div class="container-fluid">
+
+
+
+    <form  action="/guardar" class="text-dark" style="  border-radius: 20px;" method='POST' >
+      {% csrf_token %}
+
+
+
+  
+  <div class="form-row  m-1">
+    
+    <div class="form-group col-md-2">
+      <label for="inputPassword4" class="text-dark" >Nombre del Cliente</label>
+      
+      <input type="text" class="form-control rounded text-dark" required="true" name="cliente" id="cliente" placeholder="Ingrese Nombre"  value='{{cliente}}'>
+    </div>
+
+    <div class="form-group col-md-2 ">
+      <label for="apellido_p" class="text-dark" >Primer Apellido </label>
+      
+      <input type="text" class="form-control rounded text-dark"  value='{{apellido_p}}' required="true" name="apellido_p" id="apellido_p" placeholder="Ingrese Nombre">
+    </div>
+
+    <div class="form-group col-md-2 ">
+      <label for="apellido_m" class="text-dark" > Segundo Apellido
+
+      </label>
+      
+      <input type="text" class="form-control rounded text-dark"  value='{{apellido_m}}' required="true" name="apellido_m" id="apellido_m" placeholder="Ingrese Nombre">
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="dni" class="text-dark">DNI-Cliente</label>
+      <input type="text" class="form-control rounded" name="dni"  value='{{dni}}' id="dni" placeholder="DNI">
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="telefono_1" class="text-dark" >Telefono1</label>
+      <input type="text" class="form-control rounded" name="telefono_1"  value='{{telefono_1}}' id="telefono_1" placeholder="Telefono">
+    </div>
+    <div class="form-group col-md-2">
+    <label for="telefono2" class="text-dark">Telefono2</label>
+    <input type="text" class="form-control rounded" name="telefono_2" value="{{telefono_2}}" id="telefono_2" placeholder="Telefono">
+    </div>
+
+ 
+
+  </div>
+
+ 
+
+
+
+  <div class="form-row m-1">
+
+  <div class="form-group col-md-2">
+    <label for="inputMarca" class="text-dark">Marca del vehiculo</label>
+
+    <select name='marca_vehiculo' id="marca" class="form-control" onchange='traemodelos()' >
+
+        {% for m in marcas %}
+
+            {% if marca == m.nombre %}
+
+              <option value='{{m.nombre}}' selected>{{m.nombre}}</option>
+
+            {% else %}
+
+              <option  value='{{m.nombre}}'>{{m.nombre}}</option>
+
+            {% endif %}
+
+
+        {% endfor %}
+
+    </select>
+    
+
+
+
+  </div>
+
+    <div class="form-group col-md-2">
+    <label for="inputModelo" class="text-dark">Modelo del vehiculo</label>
+    
+
+     <select name='modelo' class="form-control">
+
+        {% for m in modelos %}
+
+        <option value='{{m.id}}'>{{m.modelo}}</option>
+
+        {% endfor %}
+
+    </select>
+
+
+
+  </div>
+
+
+
+    <div class="form-group col-md-2">
+    <label for="inputVersion" class="text-dark">version</label>
+    <input type="text" class="form-control rounded" id="inputVersion" name="version" placeholder="Version">
+  </div>
+
+  <div class="form-group col-md-2">
+    <label for="inputSerie" class="text-dark">Serie</label>
+    <input type="text" class="form-control rounded" id="inputSerie" name="serie" placeholder="Serie">
+  </div>
+
+    <div class="form-group col-md-2">
+    <label for="inputAnio" class="text-dark">Año </label>
+    <input type="text" class="form-control rounded" id="inputAnio"  name="anio" placeholder="Año">
+  </div>
+
+ <!--  <div class="form-group col-md-2">
+      <label for="inputMotor" class="text-dark">Motor</label>
+      <input type="text" class="form-control rounded" id="inputMotor "  name="motor" placeholder="Motor">
+      </div> -->
+
+      <div class="form-group col-md-2">
+      <label for="inputColor" class="text-dark">color</label>
+      <input type="text" class="form-control rounded" id="inputColor"  name="color" placeholder="Color"  >
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="inputCili" class="text-dark">Cilindrada del Motor</label>
+      <input type="text" class="form-control rounded" id="inputCili"  name="motor" placeholder="cilindrada">
+    </div>
+
+
+    
+
+    <div class="form-group col-md-4">
+      <label for="inputkilo" class="text-dark">Kilometraje</label>
+      <input type="text" class="form-control rounded" id="inputkilo"  name="kilometraje" placeholder="kilometraje">
+    </div>
+    
+
+
+
+
+    <div class="form-group col-md-4">
+      <label for="inputZip" class="text-dark">Placa</label>
+      <input type="text" class="form-control rounded" id="inputZip" name="placa" placeholder="Placa">
+    </div>
+
+
+    
+
+
+  </div>
+
+
+
+
+
+  <div class="form-row  m-1">
+
+    <div class="form-group col-md-2">
+      <label for="inputP" class="text-dark">Cantidad de Baterias</label>
+      <input type="number" class="form-control rounded" id="inputP" name="cantidad"  value="1" onchange="cal()" placeholder="100" >
+    </div>
+
+    <div class="form-group col-md-2">
+    <label for="inputMP" class="text-dark">Marca del Producto</label>
+    <input type="text" class="form-control rounded" id="inputMP" name="marca_producto" placeholder="Ingrese marca">
+  </div>
+
+  
+
+
+
+  <div class="form-group col-md-2">
+    <label for="inputPrecio" class="text-dark">Precio</label>
+    <div class="input-group">
+
+    <div class="input-group-prepend">
+      <div class="input-group-text" id="btnGroupAddon">S/.</div>
+    </div>
+
+    <input type="number" class="form-control rounded"  id="inputPrecio" name="precio" value=0 onchange="cal()" placeholder="s/"/>
+  </div>
+</div>
+
+  <div class="form-group col-md-2">
+    <label for="inputDesc" class="text-dark">Descuento</label>
+     <div class="input-group"> 
+    <input type="number" class="form-control rounded" id="inputDesc" name="descuento"  value="0" onchange="cal()" placeholder="18%"/>
+
+    <div class="input-group-prepend">
+      <div class="input-group-text" id="btnGroupAddon">%.</div>
+    </div>
+  </div>
+</div>
+
+
+  <div class="form-group col-md-2">
+
+        <label for="inputTotal" class="text-dark">Total</label>
+      <div class="input-group">
+    
+    <div class="input-group-prepend">
+      <div class="input-group-text" id="btnGroupAddon">S/.</div>
+    </div>
+    <input type="number" class="form-control"  id="inputTotal"  name="precio_total" value="0" readonly="readonly00">
+    </div>
+  </div>
+
+
+
+
+<!--   <div class="input-group">
+    <div class="input-group-prepend">
+      <div class="input-group-text" id="btnGroupAddon">@</div>
+    </div>
+    <input type="text" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="btnGroupAddon">
+  </div>
+ -->
+
+
+
+
+<!-- <form name="f">
+  <p>Número 1: <input type="number" name="num1" value="0" onchange="cal()" /></p>
+  <p>Número 2: <input type="number" name="num2" value="0" onchange="cal()" /></p>
+  <p>Suma: <input type="number" name="opera" value="0" readonly="readonly" /></p>
+</form>
+ -->
+
+
+
+
+  <div class="form-group col-md-2">
+    <label for="inputBU" class="text-dark">Cant. Baterias Usadas</label>
+    <input type="text" class="form-control" name="cantidad_bu" id="inputBU" placeholder="100" value="1">
+  </div>
+
+  <div class="form-group col-md-4">
+    <label for="inputFI" class="text-dark">Fecha de instalacion</label>
+    <input type="text" class="form-control" required="true" name="fecha_atencion" id="inputFI" placeholder="fecha">
+  </div>
+
+
+
+
+<!-- <div id="content">
+
+  <input type="date" id="fechaalta" nombre="fechaalta">  
+  <p id="t"></p>
+
+  <input id="datepicker" type="text">
+</div>
+ -->
+
+
+<!-- CON ESTE ESCRIP ISE PARA PONER LA FECHA ACTUAL  EN UN IMPUT---->
+
+<script type="text/javascript">
+  
+
+
+// Para este script funcione debe útilizar las últimas librerías de jquery y jquery UI
+
+var d= new Date();
+
+var dia = (d.getDate()); 
+var mes =  ("0" + (d.getMonth() + 1));
+var anio = d.getFullYear(); 
+
+var fechatotal = dia + "/"+ mes +"/" + anio
+
+$("#fechaalta").html('fechatotal');
+
+$('#t').html("<span>Fecha Actual: </span>" + fechatotal);
+
+ $( "#inputFI" ).datepicker().val(fechatotal);
+
+
+</script>
+
+
+<!--  FINN CON ESTE ESCRIP ISE PARA PONER LA FECHA ACTUAL  EN UN IMPUT---->
+
+
+
+
+
+
+<!-- 
+<div>
+  <button id="btn">Feed</button>
+  
+
+</div>
+<input type="text" id='uber' value="">
+<input type="text" id='rr' value="">
+ 
+<script>
+$( "#btn" ).click(function() {
+ var text = $('#rr').text();
+  var text = $( this ).text();
+  $( "#uber" ).val( text );
+});
+</script> -->
+ 
+
+
+
+
+
+
+  <div class="form-group col-md-4">
+    <label for="inputRF" class="text-dark">Direccion de Atencion </label>
+    <input type="text" class="form-control"  name="direccion_atencion" id="inpuguardatRF" onchange='guardadireccion()'  placeholder="Direccion">
+  </div>
+
+  <div class="form-group col-md-4">
+    <label for="inputRef" class="text-dark">Referencia</label>
+    <input type="text" class="form-control"  name="referencia" id="inputRef" placeholder="Referencia">
+  </div>
+
+  </div>
+
+<button type="button" class="btn btn-success m-1" id="bboleta" >Boleta</button>
+<button type="button" class="btn btn-danger m-1" id="ffactura">Factura</button>
+
+  <div class="form-row m-1" id="bboleta1" style="display: none">
+
+
+        
+   
+    <div class="form-check col-md-12 m-2 ">
+
+      <input class="form-check-input" type="checkbox" id="gridCheck" >
+      <label class="form-check-label" for="gridCheck">
+        ¿Mismo Cliente?
+      </label>
+    </div>
+
+      
+   
+    <!--div class="form-group col-md-4">
+      <label for="inputRs" class="text-dark" >Razon social</label>
+      <input type="text" class="form-control rounded" name="razon" id="inputRs" placeholder="Razon Social">
+    </div-->
+
+    <div class="form-group col-md-3">
+      <label for="inputNombre" class="text-dark" >Nombre</label>
+      <input type="text" class="form-control rounded" id="inputNombre" name="nombre_boleta" placeholder="Nombre del Cliente">
+    </div>
+     <div class="form-group col-md-3">
+      <label for="inputApellido_p" class="text-dark" >Primer Apellido</label>
+      <input type="text" class="form-control rounded" id="inputApellido_p" name="m_apellido_p" placeholder="Nombre del Cliente">
+    </div>
+
+     <div class="form-group col-md-3">
+      <label for="inputApellido_m" class="text-dark" >Segundo Apellido</label>
+      <input type="text" class="form-control rounded" id="inputApellido_m" name="m_apellido_m">
+    </div>
+
+
+    <div class="form-group col-md-3">
+      <label for="inputDNI" class="text-dark" >DNI del Cliente</label>
+      <input type="text" class="form-control rounded" id="inputDNI" name="dni_c" placeholder="Ingrese DNI">
+    </div>
+
+    
+
+ <!--  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#gridCheck").click(function(){
+        $("#inputNombre").value("{{cliente}}");
+
+      });
+
+    });
+
+
+  </script>
+ -->
+  <script>
+$( "#gridCheck" ).click(function() {
+
+  console.log('putitos')
+  var text = $('#cliente').text();
+  var text = $('#dni').text();
+  console.log(text)
+  $( "#inputNombre" ).val("{{cliente}}");
+  $( "#inputApellido_p" ).val("{{apellido_p}}");
+  $( "#inputApellido_m" ).val("{{apellido_m}}");
+
+  $( "#inputDNI" ).val("{{dni}}");
+
+});
+
+
+
+
+</script>
+    
+      <div class="form-group col-md-12">
+    <div class="form-check">
+      <input class="form-check-input rr" type="checkbox" id="gridCheckdireccion">
+      <label class="form-check-label" for="gridCheck">
+        ¿Misma Direccion?
+      </label>
+
+ 
+
+    </div>
+  </div>
+    <div class="form-group col-md-12">
+      <label for="inputDirec" class="text-dark">Direccion </label>
+      <input type="text" class="form-control rounded"  name="direccion1" id="inputDirec" value="" placeholder=Direccion>
+    </div>
+
+
+
+  </div>
+
+
+
+
+   <script>
+
+
+    $( "#gridCheckdireccion" ).click(function() {
+    var direccion=document.getElementById("inpuguardatRF").value
+   // var rr = $( '#inpuguardatRF').text();
+    console.log(direccion,'esto traigo')
+    console.log('entre putitas')
+  
+    $( "#inputDirec" ).val(direccion);
+
+
+
+});
+
+
+</script>
+
+
+ 
+
+  <div class="form-row m-1" id="ffactura1" style="display:none;">
+            <div class="form-group col-md-4">
+      <label for="inputRUC" class="text-dark">RUC Cliente</label>
+      <input type="text" class="form-control rounded rounded" name="ruc" id="inputRUC" placeholder="Ruc">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputRazon" class="text-dark">Razon social</label>
+      <input type="text" class="form-control rounded" name="razon_social" id="inputRazon" placeholder="Razon Social">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputDrs" class="text-dark">Direccion R.S.</label>
+      <input type="text" class="form-control rounded" name="direccion_rs" id="inputDrs" placeholder="Direccion de R.S">
+    </div>
+
+  </div>
+
+     <div class="form-row  m-1" id="descripcion" style="display: none;">
+    
+
+ <!--div class="form-group col-md-2">
+      <label for="inputEmail4">Pago </label>
+      <input type="text" class="form-control rounded" name="comprobante" id="inputEmail4" placeholder="Forma de Pago (ComboEfectivo, TC o TD Visa, TC o TD MC, Depósito, Transterencia o Efectivo y TC">
+    </div -->
+
+    <div class="form-group col-md-4">
+      <label for="inputState" class="text-dark">Pago</label>
+
+
+      <!-- <select id="inputState"  name="comprobante" class="form-control rounded">
+        <option>...</option>
+        <option selected value="0" class="text-dark">Efectivo</option>
+        <option selected value="1" class="text-dark">Tarjeta</option>
+        </select> -->
+
+
+        <!--esto es pagos {{pagos}}-->
+
+         <select name='comprobante' class="form-control">
+
+        {% for p in pagos %}
+
+
+        <option value='{{p.id}}'>{{p.nombre}}</option>
+
+        {% endfor %}
+
+
+    </select>
+
+
+
+
+    </div>
+
+
+<div class="form-group col-md-4">
+      <label for="inputEmail" class="text-dark">Correo Electronico</label>
+      <input type="email" class="form-control rounded" name="correo" id="inputEmail" placeholder="ejemplo@gmail.com">
+    </div>
+
+
+    <div class="form-group col-md-2">
+      <label for="inputSta" class="text-dark">Atiende</label>
+      <!-- <select id="inputSta"  name="atiende"   class="form-control rounded">
+
+        <option>...</option>
+        <option selected value="0">Raul</option>
+        <option selected value="1">Luis</option>
+        </select>
+ -->
+          <select name='atiende' class="form-control">
+
+        {% for mm in atiende %}
+
+
+        <option value='{{mm.id}}'>{{mm.nombre}}</option>
+
+        {% endfor %}
+
+
+    </select>
+
+
+
+
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="inputS" class="text-dark">Almacen</label>
+      <!-- <select id="inputS"  name="almacen" class="form-control rounded">
+        <option>...</option>
+        <option selected value="0">Batery-xbgj</option>
+        <option selected value="1">Batery-xbgj01</option>
+              </select> -->
+
+
+
+        
+         <select name='almacen' class="form-control">
+
+        {% for a in almacen %}
+
+
+        <option value='{{a.id}}'>{{a.nombre}}</option>
+
+        {% endfor %}
+
+      </select>
+    </div>
+
+
+    <div class="file col-md-4">
+      <label for="inputgmap">Gmap</label>
+      <input type="file" class="form-control rounded" name="gmail" id="inputgmap" placeholder="Gmail">
+    </div>
+    <!--div class="file btn btn-lg btn-primary">
+              Upload
+              <input type="file" name="file"/>
+            </div-->
+
+   <!--  <div class="form-group col-md-4">
+      <label for="inputEstado" class="text-dark">Status</label>
+      <input type="text" class="form-control rounded"  name="status" id="inputEstado" placeholder="Statua">
+    </div>
+ -->
+
+
+
+ <div class="form-group col-md-4">
+      <label for="inputS" class="text-dark">Status</label>
+      <!-- <select id="inputS"  name="almacen" class="form-control rounded">
+        <option>...</option>
+        <option selected value="0">Batery-xbgj</option>
+        <option selected value="1">Batery-xbgj01</option>
+              </select> -->
+
+
+
+        
+         <select name='status' class="form-control">
+
+        {% for s in status %}
+
+
+        <option value='{{s.id}}'>{{s.nombre}}</option>
+
+        {% endfor %}
+
+      </select>
+    </div>
+
+
+
+    <div class="form-group col-md-4">
+      <label for="inputObs" class="text-dark" >Observaciones</label>
+      <input type="text" class="form-control for rounded" name="observaciones" id="inputObs" placeholder="Obserbaciones">
+    </div>
+  </div>
+
+
+    
+
+      <center><button type="submit" class="btn btn-primary rounded" id="modal" style="display: none" Onclick="alerta()">Guardar</button></center>
+
+
+
+        <!--div class="alert alert-warning alert-dismissible fade show" role="alert" >
+  <strong>Sus Datos Seguardaron </strong>Exitozamente 
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div-->
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+  function guardadireccion(){
+
+
+
+
+  var direccion=document.getElementById("inpuguardatRF").value
+
+
+  console.log(direccion)
+}
+
+
+
+  function cal() {
+
+
+  try {
+
+    console.log('entre oibches.......')
+  
+
+    var a = parseInt(document.getElementById("inputPrecio").value),
+        cant= parseInt(document.getElementById("inputP").value),
+        b = parseInt(document.getElementById("inputDesc").value),
+        n=100,
+
+        c = parseInt(document.getElementById("inputP").value);
+
+
+        console.log ('descuentasosss',des=(a-((b/n)*a)))
+        
+        
+    
+    console.log(a,b,c)
+
+       console.log ('total',cant*des)
+
+    document.getElementById("inputTotal").value =cant*des;
+  } catch (e) {
+  }
+}
+
+
+
+
+    function traemodelos() {
+
+
+      var x = document.getElementById("marca").value;
+      var cliente = document.getElementById("cliente").value;
+      var apellido_p = document.getElementById("apellido_p").value;
+      var apellido_m = document.getElementById("apellido_m").value;
+      var dni = document.getElementById("dni").value;
+      var telefono_1 = document.getElementById("telefono_1").value;
+      var telefono_2 = document.getElementById("telefono_2").value;
+      //var pago = document.getElementById("pago").value;
+      // var direccion = document.getElementById("direccion").value;
+
+     
+
+    window.location.href = "/dashboard/?marca="+x+'&cliente='+cliente+'&apellido_p='+apellido_p+'&apellido_m='+apellido_m+'&dni='+dni+'&telefono_1='+telefono_1+'&telefono_2='+telefono_2
+
+
+
+    }
+
+
+
+
+  $(document).ready(function(){
+    $("#bboleta").click(function(){
+
+      $('#ffactura1').hide()
+      $('#descripcion').hide()
+       $('#bboleta1').show()
+       $('#descripcion').show()
+       $('#modal').show()
+
+
+    });
+   
+
+
+  });
+
+  $(document).ready(function(){
+    $("#ffactura").click(function(){
+
+        $('#bboleta1').hide()
+        $('#ffactura1').hide()
+       $('#descripcion').show()
+       $('#ffactura1').show()
+       $('#descripcion').show()
+       $('#modal').show()
+    });
+   
+
+
+  });
+
+</script>
+
+
+
+
+
+  <!-- <div class="form-group">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="gridCheck">
+      <label class="form-check-label" for="gridCheck">
+        Check me out
+      </label>
+    </div>
+  </div>
+
+  di
+  
+</form>								
+																
+
+
+
+
+
+
+
+
+
+<!-- aqui empieza..-->
+
+ <!--  
+  <div class="col-md-12">
+        <div class="header-content-left">
+
+
+         
+        </div>
+      </div> -->
+
+
+
+
+
+
+
+	  <!-- aqui empieza..-->
+		<!--div class="row mt-5"  -->
+			<!-- <div class="col-md-4">
+				<div class="header-content-left">
+
+
+					<form  style=" background: #499D91; border-radius: 20px; border-color: black; border-style: solid" >
+						
+						<center> <h1>Cliente</h1></center>
+  <div class="form-group row m-1">
+    <label for="inputEmail3" class="col-sm-5 col-form-label" style='color:black'>NOMBRE</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="">
+    </div>
+  </div>
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>DNI</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>TELEFONO1</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>TELEFONO2</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+  <hr style="border-style: solid; border-color: black;">
+
+  						<center> <h1>Vehiculo</h1></center>
+  <div class="form-group row m-1">
+    <label for="inputEmail3" class="col-sm-5 col-form-label" style='color:black'>MARCA</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="">
+    </div>
+  </div>
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>VERSION</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>AÑO</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+<div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>CILINDRADA</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+<div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>KILOMETRAJE</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+
+<div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>PLACA</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+ <br>
+</form >
+
+				</div>
+			</div> -->
+			
+			
+<!-- <div class="col-md-4">
+										
+<form   style=" background: #499D91; border-radius: 20px; border-color: black; border-style: solid" >
+		
+		<center> <h1>Productos</h1></center>
+  <div class="form-group row m-1">
+    <label for="inputEmail3" class="col-sm-5 col-form-label" style='color:black'>CANTIDAD</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="">
+    </div>
+  </div>
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>MARCA</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>MODELO</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>AÑO</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+<div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>PRECIO</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>DESCUENTO</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+<div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>PRECIO TOTAL</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+
+<div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black;' >CANT-B-USADA</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+ <br>
+
+</form>
+			</div> -->
+
+
+
+<!-- <div class="col-md-4"> -->
+				
+				
+<!-- 							
+<form   style="background:#499D91; border-radius: 20px; border-color: black; border-style: solid"  >
+		<center> <h1>Atencion</h1></center> -->
+		
+
+<!--   <div class="form-group row m-1">
+    <label for="inputEmail3" class="col-sm-5 col-form-label" style='color:black'>FECHA</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="">
+    </div>
+  </div>
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>DIRECCION</label>
+    <div class="col-sm-5">
+      <input type="" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>REFERENCIA</label>
+    <div class="col-sm-5">
+      <input type="" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div> -->
+
+  <!--div class="form-group row m-1">
+    <label   for="inputPassword3" class="col-sm-5 col-form-label">DOCUMENTO-P</label>
+    <div class="col-sm-5">
+      <select class="form-control  col-sm-12 col-form-label" id="exampleFormControlSelect1">
+      <option></option>
+      <option href="#collapseExample">Factura</option>
+      <option value="volvo">Volvo</option>
+      <option>Boleta</option>
+      
+    </select> 
+  
+    </div>
+  </div-->
+
+<!--    <div class="form-group row m-1">
+    <label for="inputEmail3" class="col-sm-5 col-form-label" style='color:black' >DOCUMENTO DE PAGO</label>
+    <div class="col-sm-5">
+      <label for="inputEmail3" class="col-sm-5 col-form-label" id='boleta' style='color:black'>BOLETA</label>
+      <label for="inputEmail3" class="col-sm-5 col-form-label " id='ls' style='color:black' >FACTURA</label>
+       
+    </div>
+  </div>
+
+ <br>
+
+
+
+
+
+
+
+
+
+</form -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <form  id="boleta1" style="background:#499D91; border-radius: 20px; border-color: black; border-style: solid; display: none; " >
+    <center> <h1>Boleta</h1></center>
+    
+
+  <!div class="form-group row m-1">
+    <label for="inputEmail3" class="col-sm-5 col-form-label" style='color:black'>MISMO CLIENTE?</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="">
+    </div>
+  </div-->
+
+ <!--  <div class="form-group row m-1">
+    <div class="col-sm-5" style='color:black' >MISMO CLIENTE?</div>
+    <div class="col-sm-5">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+          SI/NO
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>NOM-BOLETA</label>
+    <div class="col-sm-5">
+      <input type="" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>DNI-CLIENTE</label>
+    <div class="col-sm-5">
+      <input type="" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div> -->
+
+  <!--div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label  " style='color:black'>MISMA-DIRECCION?</label>
+    <div class="col-sm-5"> 
+      <input type="" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div-->
+
+   <!-- <div class="form-group row m-1">
+    <div class="col-sm-5" style='color:black'>MISMA DIRECCION?</div>
+    <div class="col-sm-5">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+          SI/NO
+        </label>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>PAGO</label>
+    <div class="col-sm-5">
+      <input type="" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div> -->
+
+
+<!--   <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>CORREO ELECTRONICO</label>
+    <div class="col-sm-5">
+      <input type="" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>ATIENDE</label>
+    <div class="col-sm-5">
+      <select class="form-control  col-sm-12 col-form-label" id="exampleFormControlSelect1">
+      <option>LUIS</option>
+      <option>LEO</option>
+      <option>MAURO</option>
+      
+    </select>
+  
+    </div>
+  </div>
+
+
+
+
+
+<div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>ALMACEN</label>
+    <div class="col-sm-5">
+      <select class="form-control  col-sm-12 col-form-label" id="exampleFormControlSelect1">
+      <option>LUIS</option>
+      <option>LEO</option>
+      <option>MAURO</option>
+      
+    </select>
+  
+    </div>
+  </div> -->
+
+
+
+ <!--  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>GMAIL</label>
+    <div class="col-sm-5">
+      <input type="" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>ESTATUS</label>
+    <div class="col-sm-5">
+      <input type="" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>OBSERBACIONES</label>
+    <div class="col-sm-5">
+      <input type="" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div> -->
+
+
+
+
+
+
+
+<div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</form>
+
+<!--- aqui ojala funcione-->
+
+
+<div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <form   action='/guardar' method='POST' id="factura1" style=" background: #499D91; border-radius: 20px; border-color: black; border-style: solid; display: none; "  >
+    <center> <h1>Factura</h1></center>
+    
+
+    {% csrf_token %}
+
+  <div class="form-group row m-1">
+    <label for="inputEmail3" class="col-sm-5 col-form-label" style='color:black'>RUC-CLIENTE</label>
+    <div class="col-sm-5">
+      <input required type="text" name='ruc' required class="form-control" id="inputEmail3" placeholder="">
+    </div>
+  </div>
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>RAZON SOCIAL</label>
+    <div class="col-sm-5">
+      <input type="text" name='razon' class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>DIRECCION R.S</label>
+    <div class="col-sm-5">
+      <input type="" name='' class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+ 
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>PAGO</label>
+    <div class="col-sm-5">
+      <input type="" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>CORREO ELECTRONICO</label>
+    <div class="col-sm-5">
+      <input type="" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>ATIENDE</label>
+    <div class="col-sm-5">
+      <select class="form-control  col-sm-12 col-form-label" id="exampleFormControlSelect1">
+      <option>LUIS</option>
+      <option>LEO</option>
+      <option>MAURO</option>
+      
+    </select>
+  
+    </div>
+  </div>
+
+
+
+
+
+<div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>ALMACEN</label>
+    <div class="col-sm-5">
+      <select class="form-control  col-sm-12 col-form-label" id="exampleFormControlSelect1">
+      <option>LUIS</option>
+      <option>LEO</option>
+      <option>MAURO</option>
+      
+    </select>
+  
+    </div>
+  </div>
+
+
+
+  <div class="form-group row m-1">
+    
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>GMAIL</label>
+
+    <div class="col-sm-5">
+      <input type="" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black'>ESTATUS</label>
+    <div class="col-sm-5">
+      <input type="" class="form-control" id="inputPassword3" placeholder="">
+    </div>
+  </div>
+
+  <div class="form-group row m-1">
+    <label for="inputPassword3" class="col-sm-5 col-form-label" style='color:black' >OBSERBACIONES</label>
+    <div class="col-sm-5">
+      <input type="" class="form-control" id="inputPassword3" placeholder="" style='color:black' >
+    </div>
+  </div>
+       <br>
+
+<button type="submit" class="btn btn-primary sticky-top " >GUARDAR</button>
+</form> -->
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#boleta").click(function(){
+        $('#factura1').hide()
+        $('#boleta1').show()
+    });
+   
+
+
+  });
+
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#botom").click(function(){
+
+      
+       $('#fact').show()
+    });
+   
+
+
+  });
+
+</script>
+
+
+
+
+
+
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+ 
+	
+
+
+
+										</header>
+
+<!-- <div class="dropdown-menu">
+  <form class="px-4 py-3">
+    <div class="form-group">
+      <label for="exampleDropdownFormEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+    </div>
+    <div class="form-group">
+      <label for="exampleDropdownFormPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="dropdownCheck">
+      <label class="form-check-label" for="dropdownCheck">
+        Remember me
+      </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign in</button>
+  </form>
+  <div class="dropdown-divider"></div>
+  <a class="dropdown-item" href="#">New around here? Sign up</a>
+  <a class="dropdown-item" href="#">Forgot password?</a>
+</div> -->
+
+
+
+
+<!-- <div class="dropdown-menu">
+  <form class="px-4 py-3">
+    <div class="form-group">
+      <label for="exampleDropdownFormEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+    </div>
+    <div class="form-group">
+      <label for="exampleDropdownFormPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="dropdownCheck">
+      <label class="form-check-label" for="dropdownCheck">
+        Remember me
+      </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign in</button>
+  </form>
+  <div class="dropdown-divider"></div>
+  <a class="dropdown-item" href="#">New around here? Sign up</a>
+  <a class="dropdown-item" href="#">Forgot password?</a>
+</div> -->
+
+
+										<!-- Dashboard Header Section    -->
+
+
+
+
+										<!-- <section class="dashboard-header">
+												<div class="container-fluid">
+													
+
+										#{% include "calendar_1.html" %}
+
+
+										
+												</div>
+										</section> -->
+										
+										<!-- Projects 
+											Section-->
+						
+										<!-- Client Section-->
+    
+          <!-- Feeds Section-->
+
+
+
+
+
+
+
+
+       
+								
+										<Page Footer-->
+									{% include "footer.html" %}
+								
+						
+				</div>
+				<!-- Javascript files-->
+
+
+
+
+
+
+
+
+
+
+				<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+				<script src="/static/js/tether.min.js"></script>
+				<script src="/static/js/bootstrap.min.js"></script>
+				<script src="/static/js/jquery.cookie.js"> </script>
+				<script src="/static/js/jquery.validate.min.js"></script-->
+			
+				<!-- <script src="/static/js/front.js"></script>-->
+				<!-- Google Analytics: change UA-XXXXX-X to be your site's ID.-->
+
+				<!--script src="/static/ui-calendar-master/bower_components/jquery/dist/jquery.js"></script>
+
+				<script src="/static/ui-calendar-master/bower_components/angular/angular.js"></script>
+				<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.js"></script>
+				<script src="/static/ui-calendar-master/bower_components/moment/moment.js"></script>
+				<script src="/static/ui-calendar-master/bower_components/fullcalendar/dist/fullcalendar.js"></script>
+				<script src="/static/ui-calendar-master/bower_components/fullcalendar/dist/gcal.js"></script>
+				<script src="/static/ui-calendar-master/src/calendar.js"></script>
+				<script src="/static/ui-calendar-master/demo/calendarDemo.js"></script-->
+
+				<!---->
+				<!--script>
+						(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+						function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+						e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+						e.src='//www.google-analytics.com/analytics.js';
+						r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+						ga('create','UA-XXXXX-X');ga('send','pageview');
+				</script-->
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+		</body>
+</html>

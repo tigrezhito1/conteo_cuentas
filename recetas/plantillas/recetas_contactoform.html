@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block titulo %}Contactanos{% endblock %}
+{% block encabezado %}
+	<h1>Comunícate con nosotros</h1>
+{% endblock %}
+
+{% include "header.html" %}
+{% block contenido %}
+	<form id='formulario' method='post' action=''>{% csrf_token %}
+	{{formulario.as_p}}
+	<p><input type='submit' value='Guardar'/></p>
+	</form>
+
+
+

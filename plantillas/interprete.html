@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+
+{% block contenido %}
+<!-- 	<form id='formulario' method='post' action=''>
+		{% csrf_token %}
+		{{datos}}
+		<p><input type='submit' value='Confirmar'/></p>
+	</form> -->
+
+
+
+
+
+{% include "header.html" %}
+
+
+
+<div class='container'>
+
+  <div style='height:20px;'></div>
+
+    <form id='formulario' method='POST' action='/interprete/'>
+		{% csrf_token %}
+	  
+
+      <div class='row'>
+      					
+
+
+            {% for field in datos %}
+            			
+              <div class="form-group col-md-2">
+
+
+                  {{ field.label_tag }} {{ field }}
+
+                  
+              </div>
+            {% endfor %}
+
+      </div>
+
+     	<p><input class='btn btn-dark' type='submit' value='Guardar'/></p>
+	</form>
+
+	<!-- On rows -->
+	<table class="table">
+  <thead class="bg-primary">
+    <tr>
+      <th scope="col">ID</th>
+
+      <th scope="col">Fecha</th>
+      <th scope="col">Estatus</th>
+      <th scope="col">Start</th>
+      <th scope="col">Finish</th>
+      <th scope="col">Time</th>
+      <th scope="col">Client</th>
+      <th scope="col">Reason</th>
+      <th scope="col">Comments</th>
+      <th scope="col">Time Inter</th>
+
+    </tr>
+  </thead>
+  {% for l in llamada%}
+  <tbody>
+    <tr>
+      <th scope="row">{{l.id}}</th>
+
+      <td>{{l.fecha}}</td>
+      <td>{{l.status}}</td>
+      <td>{{l.start}}</td>
+
+      <td>{{l.finish}}</td>
+      <td>{{l.time}}</td>
+      <td>{{l.client}}</td>
+      <td>{{l.reason}}</td>
+      <td>{{l.comments}}</td>
+      <td>{{l.time_inter}}</td>
+
+    </tr>
+   
+  </tbody>
+  {% endfor %}
+</table>
+
+
+	
+
+</div>
+
+
+
+
+
+<!-- Footer -->
+{% include "footer.html" %}
+{% endblock %}
+
+

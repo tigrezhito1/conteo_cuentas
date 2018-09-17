@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block contenido %}
+
+{% include "header.html" %}
+
+
+
+<div class='container'>
+
+  <div style='height:20px;'></div>
+
+    <form id='formulario' method='POST' action='/datitos/'>
+    {% csrf_token %}
+    
+
+      <div class='row'>
+                
+
+
+            {% for field in datos %}
+                  
+              <div class="form-group col-md-2">
+
+
+                  {{ field.label_tag }} {{ field }}
+
+                  
+              </div>
+            {% endfor %}
+
+      </div>
+
+      <p><input class='btn btn-dark' type='submit' value='Guardar'/></p>
+  </form>
+
+
+  <!-- On rows -->
+  <table class="table">
+  <thead class="bg-primary">
+    <tr>
+      <th scope="col">ID</th>
+
+      <th scope="col">Fecha</th>
+      <th scope="col">id_cuota</th>
+      <th scope="col">agente</th>
+      <th scope="col">monto</th>
+      <th scope="col">ticket</th>
+      <th scope="col">total</th>
+      <!-- <th scope="col">Reason</th>
+      <th scope="col">Comments</th>
+      <th scope="col">Time Inter</th> -->
+
+    </tr>
+  </thead>
+  {% for l in dato%}
+  <tbody>
+    <tr>
+      <th scope="row">{{l.id}}</th>
+
+      <td>{{l.fecha}}</td>
+      <td>{{l.id_cuota}}</td>
+      <td>{{l.agente}}</td>
+
+      <td>{{l.monto}}</td>
+      <td>{{l.ticket}}</td>
+      <td>{{l.total}}</td>
+
+    </tr>
+   
+  </tbody>
+  {% endfor %}
+</table>
+
+
+  
+
+</div>
+
+
+
+
+
+<!-- Footer -->
+
+
+
+  <p>
+	  Actualmente tenemos registradas: 
+     {% with total=recetas.count %} 
+		{{total}} receta{{total|pluralize}}
+	 {% endwith %}
+  </p>
+	<ul>		
+	  {% for dato in recetas %}
+	  <li class="{% cycle 'impar' 'par' %}">{{dato.titulo|title}}</li>
+	  {% empty %}
+	  <li>No hay recetas registradas aún.</li>
+	  {% endfor %}
+	</ul>
+{% endblock %}

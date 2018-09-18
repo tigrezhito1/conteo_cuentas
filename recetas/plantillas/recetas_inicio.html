@@ -40,16 +40,16 @@
 
   <!-- On rows -->
   <table class="table">
-  <thead class="bg-primary">
+  <thead class="bg-danger">
     <tr>
       <th scope="col">ID</th>
 
       <th scope="col">Fecha</th>
       <th scope="col">id_cuota</th>
-      <th scope="col">agente</th>
+      <!-- <th scope="col">agente</th> -->
       <th scope="col">monto</th>
       <th scope="col">ticket</th>
-      <th scope="col">total</th>
+      <!-- <th scope="col">total</th> -->
       <!-- <th scope="col">Reason</th>
       <th scope="col">Comments</th>
       <th scope="col">Time Inter</th> -->
@@ -63,28 +63,47 @@
 
       <td>{{l.fecha}}</td>
       <td>{{l.id_cuota}}</td>
-      <td>{{l.agente}}</td>
+    <!--   <td>{{l.agente}}</td> -->
 
       <td>{{l.monto}}</td>
       <td>{{l.ticket}}</td>
-      <td>{{l.total}}</td>
+     <!--  <td>{{suma}}</td> -->
 
+      <!--label>{{l.monto}}+{{l.total}}+</label-->
+
+
+      <!--   <script type="text/javascript">
+
+        var monto={{l.monto}};
+        var laSuma =0
+
+
+
+        var laSuma=laSuma+{{l.monto}};
+        console.log(laSuma)
+        for 
+        </script> -->
+    
+    
+        
+
+               
     </tr>
    
   </tbody>
 
 
   {% endfor %}
-    <thead class="bg-primary">
+    <thead class="bg-danger">
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">###</th>
 
-      <th scope="col">#</th>
-      <th scope="col">#</th>
-      <th scope="col">#</th>
-      <th scope="col">#</th>
-      <th scope="col">#</th>
-      <th scope="col">#</th>
+      <th scope="col">###</th>
+      <th scope="col">###</th>
+      <th scope="col">{{suma}}</th>
+       <th scope="col">#</th>
+      <!-- <th scope="col">#</th> -->
+      <!-- <th scope="col">{{suma}}</th> -->
       <!-- <th scope="col">Reason</th>
       <th scope="col">Comments</th>
       <th scope="col">Time Inter</th> -->

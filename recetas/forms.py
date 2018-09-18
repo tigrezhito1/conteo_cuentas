@@ -32,7 +32,7 @@ class DatoForm(ModelForm):
 	class Meta:
 		model = Datos
 		fields = '__all__'
-		exclude=('agente',)
+		exclude=('agente','total')
 		widgets = {
 
 			

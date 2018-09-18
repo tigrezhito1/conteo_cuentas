@@ -55,6 +55,7 @@ from datetime import datetime, timedelta,date
 
 
 
+
 @login_required(login_url="/usuarios//")
 
 def datitos(request):
@@ -106,13 +107,26 @@ def datitos(request):
         formulario = DatoForm()
 
         
-        context = {'datos': formulario,'dato':lla,'agente':a}
         
+
+        laSuma = 0
+        for i in Datos.objects.all():
+            laSuma = laSuma +int(i.monto) 
+            print 'lo logre carajo....',laSuma
+   
+        context = {'datos': formulario,'dato':lla,'agente':a,'suma':laSuma}
+
+
+        
+  
+       
     
 
         return render(request, 'recetas_inicio.html',context)
 
 
+
+  
 
 
 

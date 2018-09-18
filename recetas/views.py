@@ -56,6 +56,7 @@ from datetime import datetime, timedelta,date
 
 
 @login_required(login_url="/usuarios//")
+
 def datitos(request):
 
     if request.method=='POST':
@@ -115,10 +116,10 @@ def datitos(request):
 
 
 
-@login_required(login_url='/ingresar')
-def cerrar(request):
-    logout(request)
-    return HttpResponseRedirect('/')
+# @login_required(login_url='/ingreso')
+# def cerrar(request):
+#     logout(request)
+#     return HttpResponseRedirect('/')
 
 def comentario_nuevo(request):
     if request.method=='POST':
@@ -150,6 +151,8 @@ def contacto(request):
     context = {'formulario': formulario}
     return render(request, 'recetas_contactoform.html',context)
 
+
+
 def ingreso(request):
 
     if request.method=='POST':
@@ -161,10 +164,11 @@ def ingreso(request):
         user = authenticate(username=username, password=password)
         if user is not None:
 
-            login(request, user)
+            print 'porque me manda a ingresar??',login(request, user)
 
 
-            return HttpResponseRedirect('/ /')
+
+            return HttpResponseRedirect('/datitos/')
 
         else:
 
@@ -202,29 +206,29 @@ def inicio(request):
 
 
 
-def ingresar(request):
-    if not request.user.is_anonymous():
-        return HttpResponseRedirect('/privado')
-    if request.method == 'POST':
-        formulario = AuthenticationForm(request.POST)
-        if formulario.is_valid:
-            usuario = request.POST['username']
-            clave = request.POST['password']
-            acceso = authenticate(username=usuario, password=clave)
-            if acceso is not None:
-                if acceso.is_active:
-                    login(request, acceso)
-                    return HttpResponseRedirect('/privado')
-                else:
-                    return render(request, 'noactivo.html')
-            else:
-                return render(request, 'nousuario.html')
-    else:
-        formulario = AuthenticationForm()
-    context = {'formulario': formulario}
-    return render(request, 'ingresar.html', context)
+# def ingresar(request):
+#     if not request.user.is_anonymous():
+#         return HttpResponseRedirect('/privado')
+#     if request.method == 'POST':
+#         formulario = AuthenticationForm(request.POST)
+#         if formulario.is_valid:
+#             usuario = request.POST['username']
+#             clave = request.POST['password']
+#             acceso = authenticate(username=usuario, password=clave)
+#             if acceso is not None:
+#                 if acceso.is_active:
+#                     login(request, acceso)
+#                     return HttpResponseRedirect('/privado')
+#                 else:
+#                     return render(request, 'noactivo.html')
+#             else:
+#                 return render(request, 'nousuario.html')
+#     else:
+#         formulario = AuthenticationForm()
+#     context = {'formulario': formulario}
+#     return render(request, 'ingresar.html', context)
 
-@login_required(login_url='/ingresar')
+@login_required(login_url='/ingreso/')
 def privado(request):
     usuario = request.user
     context = {'usuario': usuario}

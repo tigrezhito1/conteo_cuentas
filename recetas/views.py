@@ -56,6 +56,7 @@ from django.db.models import Count
 
 
 
+
 @login_required(login_url="/usuarios//")
 
 def datitos(request):
@@ -113,7 +114,7 @@ def datitos(request):
         for i in Datos.objects.filter(agente_id=a):
             laSuma = laSuma +int(i.monto) 
             print 'lo logre carajo....',laSuma
-           
+
             Cuotas= Datos.objects.filter(agente_id=a).count()
             print 'locoooo',Cuotas
 

@@ -16,6 +16,7 @@ from datetime import datetime, timedelta,date
 
 
 
+
 @python_2_unicode_compatible
 class Receta(models.Model):
     titulo = models.CharField(max_length=100, verbose_name=u'Título', unique=True)
@@ -53,6 +54,8 @@ class Datos(models.Model):
     id_cuota=models.CharField(max_length=100)
     agente= models.ForeignKey('Agente',blank=True, null=True)    
     monto= models.CharField( max_length=100, blank=True, null=True)
+    #ticket = models.FileField(upload_to = 'ticket',)
+    #ticket= models.FileField(upload_to='static',blank=True, null=True)
     ticket= models.CharField(max_length=1000,blank=True,null=True)
     total= models.CharField(max_length=1000,blank=True,null=True)
     

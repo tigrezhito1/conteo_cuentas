@@ -43,6 +43,10 @@ class DatoForm(ModelForm):
 			
 			'ticket': forms.TextInput(attrs={'class': 'form-control '}),
 			'total': forms.TextInput(attrs={'class': 'form-control '}),
+
+
+
+			
 			
 
 			

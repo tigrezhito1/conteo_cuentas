@@ -52,7 +52,7 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.template.defaultfilters import slugify
 from datetime import datetime, timedelta,date
-
+from django.db.models import Count
 
 
 
@@ -110,12 +110,16 @@ def datitos(request):
         
 
         laSuma = 0
-        for i in Datos.objects.all():
+        for i in Datos.objects.filter(agente_id=a):
             laSuma = laSuma +int(i.monto) 
             print 'lo logre carajo....',laSuma
-   
-        context = {'datos': formulario,'dato':lla,'agente':a,'suma':laSuma}
+           
+            Cuotas= Datos.objects.filter(agente_id=a).count()
+            print 'locoooo',Cuotas
 
+   
+        context = {'datos': formulario,'dato':lla,'agente':a,'suma':laSuma,'cuotas':Cuotas}
+        
 
         
   

@@ -15,7 +15,7 @@ import json
 import requests
 from django.contrib.admin.filters import DateFieldListFilter
 
-from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
+#from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 from .models import *
 
 admin.site.register(Receta)

@@ -13,7 +13,7 @@ from .models import *
 from django.shortcuts import render
 
 from django.views.decorators.csrf import csrf_exempt
-import simplejson
+#import simplejson
 from django.http import HttpResponse,JsonResponse
 from django.http import HttpResponseRedirect
 
@@ -32,7 +32,7 @@ from django.contrib.auth.views import login
 #.....
 
 from django.template import RequestContext
-import xlrd
+#import xlrd
 from django.db.models import Count,Sum
 
 
@@ -57,7 +57,7 @@ from django.db.models import Count
 
 
 
-@login_required(login_url="/usuarios//")
+@login_required(login_url="/usuarios/")
 
 def datitos(request):
 
@@ -98,11 +98,11 @@ def datitos(request):
         
         a= Agente.objects.get(usuario=request.user)
 
-        print 'Agente',a
+        #print ('Agente',a)
 
         lla = Datos.objects.filter(agente=a).order_by('-id')
 
-        print 'Llamada',lla
+        #print 'Llamada',lla
 
 
         formulario = DatoForm()
@@ -113,10 +113,10 @@ def datitos(request):
         laSuma = 0
         for i in Datos.objects.filter(agente_id=a):
             laSuma = laSuma +int(i.monto) 
-            print 'lo logre carajo....',laSuma
+            #print 'lo logre carajo....',laSuma
 
             Cuotas= Datos.objects.filter(agente_id=a).count()
-            print 'locoooo',Cuotas
+            #print 'locoooo',Cuotas
 
    
         context = {'datos': formulario,'dato':lla,'agente':a,'suma':laSuma,'cuotas':Cuotas}
@@ -179,11 +179,11 @@ def ingreso(request):
         username = request.POST['username']
         password = request.POST['password']
 
-        print 'estos son los usurios _poeue no entra?',username,password
+        #print 'estos son los usurios _poeue no entra?',username,password
         user = authenticate(username=username, password=password)
         if user is not None:
 
-            print 'porque me manda a ingresar??',login(request, user)
+            #print 'porque me manda a ingresar??',login(request, user)
 
 
 

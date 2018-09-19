@@ -14,9 +14,6 @@ import datetime
 from django.db.models import signals
 from datetime import datetime, timedelta,date
 
-
-
-
 @python_2_unicode_compatible
 class Receta(models.Model):
     titulo = models.CharField(max_length=100, verbose_name=u'Título', unique=True)
@@ -24,7 +21,7 @@ class Receta(models.Model):
     preparacion = models.TextField(verbose_name=u'Preparación', help_text=u'El proceso de preparación')
     imagen = models.ImageField(upload_to='recetas', verbose_name=u'Imágen')
     tiempo_registro = models.DateTimeField(auto_now=True)
-    usuario = models.ForeignKey(User)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.titulo
@@ -32,7 +29,7 @@ class Receta(models.Model):
 
 @python_2_unicode_compatible
 class Comentario(models.Model):
-    receta = models.ForeignKey(Receta)
+    receta = models.ForeignKey(Receta, on_delete=models.CASCADE)
     texto = models.TextField(help_text=u'Tú comentario', verbose_name='Comentario')
 
     def __str__(self):
@@ -52,7 +49,7 @@ class Agente(models.Model):
 class Datos(models.Model):
     fecha = models.DateTimeField(default=datetime.today(),editable=False)
     id_cuota=models.CharField(max_length=100)
-    agente= models.ForeignKey('Agente',blank=True, null=True)    
+    agente= models.ForeignKey('Agente',blank=True, null=True, on_delete=models.CASCADE)    
     monto= models.CharField( max_length=100, blank=True, null=True)
     #ticket = models.FileField(upload_to = 'ticket',)
     #ticket= models.FileField(upload_to='static',blank=True, null=True)

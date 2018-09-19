@@ -55,8 +55,8 @@ class Datos(models.Model):
     agente= models.ForeignKey('Agente',blank=True, null=True)    
     monto= models.CharField( max_length=100, blank=True, null=True)
     #ticket = models.FileField(upload_to = 'ticket',)
-    #ticket= models.FileField(upload_to='static',blank=True, null=True)
-    ticket= models.CharField(max_length=1000,blank=True,null=True)
+    ticket= models.FileField(upload_to='static/',blank=True, null=True)
+    #ticket= models.CharField(max_length=1000,blank=True,null=True)
     total= models.CharField(max_length=1000,blank=True,null=True)
     
 

@@ -53,13 +53,17 @@ from django.dispatch import receiver
 from django.template.defaultfilters import slugify
 from datetime import datetime, timedelta,date
 from django.db.models import Count
-
+from django.shortcuts import render, redirect
 
 
 
 @login_required(login_url="/usuarios//")
 
 def datitos(request):
+
+    
+       
+
 
     if request.method=='POST':
 
@@ -70,11 +74,22 @@ def datitos(request):
 
 
 
-        form = DatoForm(request.POST, instance=lla)
+        form = DatoForm(request.POST,request.FILES,instance=lla)
+
+        
+
+
+        
+        
+            
+            
         
 
     
         if form.is_valid():
+
+           
+            
 
             form.save()
 
@@ -87,7 +102,7 @@ def datitos(request):
 # =======
 
 # >>>>>>> 1e795392b627130f02172a9199e9ef0bb6662856
-    
+        return redirect('datitos') 
         return HttpResponseRedirect("/datitos/")
 
 
@@ -117,17 +132,20 @@ def datitos(request):
 
             Cuotas= Datos.objects.filter(agente_id=a).count()
             print 'locoooo',Cuotas
+        
 
    
         context = {'datos': formulario,'dato':lla,'agente':a,'suma':laSuma,'cuotas':Cuotas}
         
 
         
+    
+
   
        
     
 
-        return render(request, 'recetas_inicio.html',context)
+        return render(request, 'recetas_inicio.html',context, )
 
 
 

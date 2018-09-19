@@ -13,7 +13,7 @@
 
   <div style='height:20px;'></div>
 
-    <form id='formulario' method='POST' action='/datitos/'>
+    <form id='formulario' method='POST' action='/datitos/' enctype="multipart/form-data">
     {% csrf_token %}
     
 
@@ -26,7 +26,7 @@
               <div class="form-group col-md-2">
 
 
-                  {{ field.label_tag }} {{ field }}
+                  {{ field.label_tag }} {{ field }} 
 
                   
               </div>
@@ -82,7 +82,13 @@
     <!--   <td>{{l.agente}}</td> -->
 
       <td>{{l.monto}}</td>
-      <td>{{l.ticket}}</td>
+
+
+      <!--td>{{l.ticket}}</td-->
+
+      <td><a href="{{ l.ticket.url}}">{{l.ticket.name}}</a><small>(Uploaded at: {{ l.fecha }})</small></td>
+        
+
      <!--  <td>{{suma}}</td> -->
 
       <!--label>{{l.monto}}+{{l.total}}+</label-->
@@ -99,11 +105,7 @@
         console.log(laSuma)
         for 
         </script> -->
-    
-    
-        
-
-               
+                         
     </tr>
    
   </tbody>
@@ -118,6 +120,18 @@
   
 
 </div>
+
+  <p>Uploaded files:</p>
+  <ul>
+    {% for obj in Static%}
+      <li>
+        <a href="{{ obj.ticket.url}}">{{obj.ticket.name}}</a>
+
+        <small>(Uploaded at: {{ obj.uploaded_at }})</small>
+      </li>
+    {% endfor %}
+  </ul>
+
 
 
 

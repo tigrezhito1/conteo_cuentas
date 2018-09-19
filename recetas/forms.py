@@ -33,6 +33,8 @@ class DatoForm(ModelForm):
 		model = Datos
 		fields = '__all__'
 		exclude=('agente','total')
+		
+
 		widgets = {
 
 			
@@ -41,8 +43,10 @@ class DatoForm(ModelForm):
 			'agente': forms.Select(attrs={'class': 'form-control ','type':'text'}),
 			'monto': forms.TextInput(attrs={'class': 'form-control','type':'number'}),
 			
-			'ticket': forms.TextInput(attrs={'class': 'form-control '}),
+			#'ticket': forms.TextInput(attrs={'class': 'form-control ','type':'file'}),
+			#'ticket': forms.FileField(attrs={label='Select a file'}),
 			'total': forms.TextInput(attrs={'class': 'form-control '}),
+
 
 
 

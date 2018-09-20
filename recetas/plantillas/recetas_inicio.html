@@ -45,9 +45,9 @@
       <th scope="col">ID</th>
 
       <th scope="col">Fecha</th>
-      <th scope="col">id_cuota</th>
+      <th scope="col">id_cuota  ({{cuotas}})</th>
       <!-- <th scope="col">agente</th> -->
-      <th scope="col">monto</th>
+      <th scope="col">monto  ({{suma}})</th>
       <th scope="col">ticket</th>
       <!-- <th scope="col">total</th> -->
       <!-- <th scope="col">Reason</th>
@@ -55,7 +55,7 @@
       <th scope="col">Time Inter</th> -->
 
     </tr>
-  </thead>
+<!--   </thead>
     <thead class="bg-primary">
     <tr>
       <th scope="col">###</th>
@@ -64,14 +64,14 @@
       <th scope="col">{{cuotas}}</th>
       <th scope="col">{{suma}}</th>
        <th scope="col">#</th>
-      <!-- <th scope="col">#</th> -->
-      <!-- <th scope="col">{{suma}}</th> -->
-      <!-- <th scope="col">Reason</th>
+      <th scope="col">#</th>
+      <th scope="col">{{suma}}</th>
+      <th scope="col">Reason</th>
       <th scope="col">Comments</th>
-      <th scope="col">Time Inter</th> -->
+      <th scope="col">Time Inter</th>
 
     </tr>
-  </thead>
+  </thead> -->
   {% for l in dato%}
   <tbody>
     <tr>
@@ -86,7 +86,7 @@
 
       <!--td>{{l.ticket}}</td-->
 
-      <td><a href="{{ l.ticket.url}}">{{l.ticket.name}}</a><small>(Uploaded at: {{ l.fecha }})</small></td>
+      <td><a href="{{ l.ticket.url}}">{{l.ticket.name}}</a></td>
         
 
      <!--  <td>{{suma}}</td> -->
@@ -121,21 +121,7 @@
 
 </div>
 
-  <p>Uploaded files:</p>
-  <ul>
-    {% for obj in Static%}
-      <li>
-        <a href="{{ obj.ticket.url}}">{{obj.ticket.name}}</a>
-
-        <small>(Uploaded at: {{ obj.uploaded_at }})</small>
-      </li>
-    {% endfor %}
-  </ul>
-
-
-
-
-
+ 
 
 <!-- Footer -->
 

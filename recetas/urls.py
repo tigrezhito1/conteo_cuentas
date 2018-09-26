@@ -2,6 +2,8 @@ from django.conf.urls import url
 
 from . import views
 
+  
+
 urlpatterns = [
     url(r'^$', views.inicio, name='inicio'),
     #url(r'^cerrar/$', views.cerrar, name='cerrar'),
@@ -11,6 +13,9 @@ urlpatterns = [
     url(r'^salir/$', views.salir , name='salir'),
     url(r'^datitos/$', views.datitos , name='datitos'),
 
+
+
+    url(r'^export/csv/$', views.export_users_csv, name='export_users_csv'),
     #url(r'^ingresar/$', views.ingresar, name='ingresar'),
     url(r'^privado', views.privado, name='privado'),
     url(r'^recetas/$', views.recetas, name='lista_recetas'),
@@ -19,4 +24,5 @@ urlpatterns = [
     url(r'^usuarios/$', views.usuarios, name='usuarios'),
     url(r'^usuario/nuevo/$', views.usuario_nuevo, name='usuario_nuevo'),
     url(r'^sobre/$', views.sobre, name='sobre'),
+
 ]

@@ -10,6 +10,13 @@ from views import *
 
 
 
+
+
+
+
+
+
+
 class ContactoForm(forms.Form):
     correo = forms.EmailField(label='Tú correo electrónico')
     mensaje = forms.CharField(widget=forms.Textarea)

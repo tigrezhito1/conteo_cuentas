@@ -57,6 +57,37 @@ from django.shortcuts import render, redirect
 
 
 
+
+
+
+import csv
+
+from django.http import HttpResponse
+from django.contrib.auth.models import User
+
+def export_users_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="tigrezhito.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['ID', 'fecha','id_cuota','agente',' monto','ticket'])
+    a= Agente.objects.get(usuario=request.user)
+
+    datos =Datos.objects.filter(agente_id=a).values_list('id', 'fecha','id_cuota','agente__nombre','monto','ticket',)
+    for d in datos:
+        writer.writerow(d)
+
+    # users = User.objects.all().values_list('username', 'first_name')
+    # for user in users:
+    #     writer.writerow(user)
+
+    return response
+
+
+
+
+
+
 @login_required(login_url="/usuarios//")
 
 def datitos(request):
@@ -117,7 +148,7 @@ def datitos(request):
 
         lla = Datos.objects.filter(agente=a).order_by('-id')
 
-        print 'Llamada',lla
+        print 'Llamadallllllllll',lla
 
 
         formulario = DatoForm()

@@ -17,6 +17,10 @@ from datetime import datetime, timedelta,date
 
 
 
+
+
+
+
 @python_2_unicode_compatible
 class Receta(models.Model):
     titulo = models.CharField(max_length=100, verbose_name=u'Título', unique=True)
